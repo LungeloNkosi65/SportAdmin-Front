@@ -12,6 +12,7 @@ import { CountryCrudComponent } from './components/country-crud/country-crud.com
 import { SportCountryComponent } from './components/sport-country/sport-country.component';
 import { SportTournamentComponent } from './components/sport-tournament/sport-tournament.component';
 import { TournamentBettypeComponent } from './components/tournament-bettype/tournament-bettype.component';
+import { EventCrudComponent } from './components/event-crud/event-crud.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
   {path:'sport/countries', component:CountryCrudComponent},
   {path:'sport/linkSport', component:SportCountryComponent},
   {path:'sport/linkTournament', component:SportTournamentComponent},
-  {path:'sport/linkBetType', component:TournamentBettypeComponent}
+  {path:'sport/linkBetType', component:TournamentBettypeComponent},
+  {path:'sport/event', component:EventCrudComponent}
+
 
 
 ];

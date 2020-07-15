@@ -30,8 +30,10 @@ export class EventService {
     return this.http.post(`${this.rootUrl}${this.param}`,event);
   }
 
-  // updatestbId(tbId:number,event:Event){
-  //   this.http.put(`${this.rootUrl}${this.param}${this.eventId}${tbId}`,tbId,tbId);
-  //   // 
-  // }
+  updateEvent(eventId:number,event:Event){
+   return this.http.put(`${this.rootUrl}${this.param}${this.eventId}${eventId}`,event);
+  }
+  deleteEvent(eventId:number){
+    return this.http.delete(`${this.rootUrl}${this.param}${this.eventId}${eventId}`);
+  }
 }
