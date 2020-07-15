@@ -1,0 +1,95 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+    <h2>Manage Sport Counrty </h2>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+  Add New Link
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Link Sport With Country</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <form action="" [formGroup]="sportCountryForm">
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="Department Name">Select Sport</label>
+                             <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                        </div>
+                        <div class="colo-md-8" >
+
+                             <div class="dropdown open">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Select Sport
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;"  >
+                                    <button class="dropdown-item" *ngFor="let s of sports" (click)="getSportId(s.SportId)">
+                                        {{s.Name}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="Country Name">Select Country </label>
+                             <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                        </div>
+                        <div class="colo-md-8" >
+                            <div class="dropdown open">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Select Counrty
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item" *ngFor="let c of countries"
+                                       (click)="getCountryId(c.CountryId)" >{{c.CountryName}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onFormSubmit()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <table class="table table-striped">
+        <thead class="text-white" style="background-color: purple !important;">
+            <tr>
+                <th>Sport</th>
+                <th>Country</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sc of SportCountries">
+                <td>{{sc.SportId}}</td>
+                <td>{{sc.CountryId}}</td>
+                <td>
+                    <button class="btn btn-danger" (click)="unLinkSport(sc.SportCountryId)">Unlink</button>
+                    <button class="btn btn-primary" >Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+        </div>
+    </div>
+</div>

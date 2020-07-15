@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                Add Department
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Department</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" [formGroup]="departmentForm">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="Department Name">Department Name</label>
+                                        <!-- <input type="text" placeholder="Department Name" formControlName="deparmentName"> -->
+                                    </div>
+                                    <div class="colo-md-8">
+                                        <input type="text" placeholder="Department Name"
+                                            formControlName="departmentName">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="Faculty">Faculty</label>
+                                        <!-- <input type="text" placeholder="Department Name" formControlName="deparmentName"> -->
+                                    </div>
+                                    <div class="colo-md-8">
+                                        <div class="dropdown open">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Select Faculty
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                                <button class="dropdown-item" *ngFor="let f of facultyData"
+                                                    (click)="getFacultyId(f.FacultyId)">{{f.FacultyName}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button" (click)="onFormSubmit()">Submit</button>
+                            </div> -->
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" (click)="onFormSubmit()"
+                                data-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Department Name</th>
+                        <th></th>
+                        <th>Faculty Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let dep of departments">
+                        <td>{{dep.DepartmentName}}</td>
+                        <td></td>
+                        <td>{{dep.Faculty.FacultyName}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" (click)="delete(dep.DepartmentId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

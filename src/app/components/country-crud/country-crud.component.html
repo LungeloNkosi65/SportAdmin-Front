@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId" (cick)="setHeading()">
+                   Add Country
+                 </button>
+                 
+                 <!-- Modal -->
+                 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h5 class="modal-title">
+                                     <ng-template [ngIf]="countryUpdate===null">
+                                        Add Country
+                                     </ng-template>
+                                     <ng-template [ngIf]="countryUpdate!=null">
+                                        Update Country
+                                     </ng-template>
+                                    
+                                    </h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                         <span aria-hidden="true">&times;</span>
+                                     </button>
+                             </div>
+                             <div class="modal-body">
+                                <form action="" [formGroup]="countryForm">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <label for="Department Name">Country Name</label>
+                                             <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                                        </div>
+                                        <div class="colo-md-8" >
+                                             <input type="text"   class="form-control" id="CountryName" placeholder="Country Name" formControlName="CountryName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <label for="Department Name">Country Flag</label>
+                                             <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                                        </div>
+                                        <div class="colo-md-8" >
+                                             <input type="text"  class="form-control" id="Flag" placeholder="Country Flag" formControlName="Flag">
+                                        </div>
+                                    </div>
+                                </form>
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                 <button type="submit" class="btn btn-primary"  data-dismiss="modal"  (click)="onFormSubmit()">Save</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+
+            <table class="table table-striped">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Country Name</th>
+                        <th> Flag</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let country of countries">
+                        <td>{{country.CountryName}}</td>
+                        <td>{{country.Flag}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" (click)="deleteCountry(country.CountryId)">Delete</button>
+                            <button type="button" class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modelId" (click)="loadCountryToEdit(country.CountryId)"> Update</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+          
+            
+        
+        
+   
+            
+            <script>
+                $('#exampleModal').on('show.bs.modal', event => {
+                    var button = $(event.relatedTarget);
+                    var modal = $(this);
+                    // Use above variables to manipulate the DOM
+                    
+                });
+            </script>
+            
+        </div>
+    </div>
+</div>

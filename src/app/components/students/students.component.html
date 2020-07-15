@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <h2  style="min-width: 100%;">Manage Students</h2>
+
+        <div class="col-md-12 sm-12 xs-12">
+            <table class="table table-striped">
+                <thead style="background-color: aqua !important;">
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Student Name</th>
+                        <th>Course</th>
+                        <th>Leve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of students">
+                        <td>{{s.StudentNumber}}</td>
+                        <td>{{s.Name}}</td>
+                        <td>{{s.Course.CourseName}}</td>
+                        <td>{{s.Level}} Year</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
