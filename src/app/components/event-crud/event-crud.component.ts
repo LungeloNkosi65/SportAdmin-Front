@@ -72,15 +72,18 @@ export class EventCrudComponent implements OnInit {
   }
 
    deleteEvent(eventId:number){
-     this.eventService.deleteEvent(eventId).subscribe((data:any)=>{
-       if(data!=null){
-         this.getEvents();
-       }
-     });
+     if(window.confirm("Are you sure you want to delete the record")){
+      this.eventService.deleteEvent(eventId).subscribe((data:any)=>{
+        if(data!=null){
+          this.getEvents();
+        }
+      });
+     }
    }
 
    loadEventToEdit(eventId:number){
      this.getSingleEvent(eventId);
+     this.eventUpdate=eventId;
     //  this.eventForm.
    }
 
@@ -91,6 +94,7 @@ export class EventCrudComponent implements OnInit {
 
    getTournamentId(tournamentId:number){
      this.tournamentId=tournamentId;
+     console.log('submited id', this.tournamentId);
    }
 
 

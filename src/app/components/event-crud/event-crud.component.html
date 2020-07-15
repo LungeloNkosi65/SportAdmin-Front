@@ -1,6 +1,84 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId" >
+                Add Event
+              </button>
+              <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <ng-template [ngIf]="eventUpdate===null">
+                                   Add Country
+                                </ng-template>
+                                <ng-template [ngIf]="eventUpdate!=null">
+                                   Update Country
+                                </ng-template>
+                               
+                               </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+
+                        <div class="modal-body">
+                           <form action="" [formGroup]="eventForm">
+                               <div class="form-group row">
+                                   <div class="col-md-4">
+                                       <label for="Event Name">Tournament</label>
+                                        <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                                   </div>
+                                   <div class="colo-md-8" >
+                                    <div class="dropdown open">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Select Tournament
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;">
+                                            <button class="dropdown-item" *ngFor="let t of tournaments"
+                                               (click)="getTournamentId(t.TournamentId)" >{{t.Name}}</button>
+                                        </div>
+                                    </div>
+                                   </div>
+                               </div>
+                               <div class="form-group row">
+                                   <div class="col-md-4">
+                                       <label for="Event Name">Event Name</label>
+                                        <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                                   </div>
+                                   <div class="colo-md-8" >
+                                        <input type="text"   class="form-control" id="CountryName" placeholder="Event Name" formControlName="EventName">
+                                   </div>
+                               </div>
+                               <div class="form-group row">
+                                   <div class="col-md-4">
+                                       <label for="Event Date">Event Date</label>
+                                        <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                                   </div>
+                                   <div class="colo-md-8" >
+                                        <input type="text"  class="form-control" id="Flag" placeholder="Event Date" formControlName="EeventDate">
+                                   </div>
+                               </div>
+                           </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary"  data-dismiss="modal"  (click)="onFormSubmit()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -18,8 +96,8 @@
                         <td>{{e.EventName}}</td>
                         <td>{{e.EventDate}}</td>
                         <td>
-                            <button class="btn btn-primary">Update</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modelId"(click)="loadEventToEdit(ev.EventId)">Update</button>
+                            <button class="btn btn-danger" (click)="deleteEvent(e.EventId)">Delete</button>
                         </td>
                     </tr>
                 </tbody>

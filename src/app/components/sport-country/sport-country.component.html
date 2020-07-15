@@ -52,7 +52,7 @@
                                     aria-expanded="false">
                                     Select Counrty
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;">
                                     <button class="dropdown-item" *ngFor="let c of countries"
                                        (click)="getCountryId(c.CountryId)" >{{c.CountryName}}</button>
                                 </div>
