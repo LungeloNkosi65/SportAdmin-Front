@@ -5,18 +5,19 @@ import { ErrorhandlerService } from './errorhandler.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
+import {SportCountryVm} from '../Models/ViewModels/sportCountryVm';
 @Injectable({
   providedIn: 'root'
 })
 export class SportsCountryService {
  rootUrl=environment.sportsApiUrl;
  param='SportsCountries';
- pramGet='/GetAll';
+ pramGet='/GetZonke';
  eventId='?sportCountryId=';
   constructor(private http:HttpClient, private errorHander:ErrorhandlerService) { }
 
-  getSportCountries():Observable<SportCountry[]>{
-    return this.http.get<SportCountry[]>(`${this.rootUrl}${this.param}${this.pramGet}`)
+  getSportCountries():Observable<SportCountryVm[]>{
+    return this.http.get<SportCountryVm[]>(`${this.rootUrl}${this.param}${this.pramGet}`)
     .pipe(catchError(this.errorHander.handleError));
   }
 

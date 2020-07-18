@@ -1,9 +1,9 @@
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-md-12">
 
                  <!-- Button trigger modal -->
-                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
                    Add Tournaments
                  </button>
                  
@@ -43,14 +43,17 @@
                 <thead></thead>
                 <tbody>
                     <tr>
+                        <th> Id</th>
                         <th>Tournament Name</th>
                         <th>Actions</th>
                     </tr>
                     <tr *ngFor="let tournament of tournaments">
+                        <td>{{tournament.TournamentId}}</td>
                         <td>{{tournament.Name}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger" (click)="deleteTournament(tournament.TournamentId)">Delete</button>
-                            <button type="button" class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-danger" (click)="deleteTournament(tournament.TournamentId)">Delete</button>|
+                            <button type="button" class="btn btn-primary" (click)="loadTournamentToEdit(tournament.TournamentId)" data-toggle="modal" data-target="#modelId">
+                                Update</button>
                         </td>
                         <td></td>
                     </tr>

@@ -17,3 +17,24 @@ p {
   a {
     color: darkblue;
   }
+
+  .navbar{
+    color: black !important;
+    background-color: #23779a !important;
+    min-width: 100% !important;
+    font-style: normal black !important;
+  }
+  .nav-item{
+    color: white !important;
+  }
+
+  .navbar-brand{
+    color: white !important;
+  }
+
+  .navbar-nav{
+    color: white !important;
+  }
+  .nav-link{
+    color: white !important;
+  }

@@ -1,9 +1,9 @@
 <div class="container">
-    <div class="row">
-        <h2>Manage Tournament Link</h2>
+    <div class="row mt-2">
+        <!-- <h2>Manage Tournament Link</h2> -->
         <div class="col-md-12">
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
     Add New Link
   </button>
   
@@ -118,24 +118,24 @@
 
 
             <table class="table table-striped">
-                <thead style="background-color: purple !important;">
+                <thead style="color: black !important;" >
                     <tr>
                         <th>Id</th>
-                        <th>Sport</th>
-                        <th>Country</th>
-                        <th>Tournament</th>
+                        <th>Sport Name</th>
+                        <th>Country Name</th>
+                        <th>Tournament Name</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let st of sportTournaments">
                         <td>{{st.SportTourtnamentId}}</td>
-                        <td>{{st.SportId}}</td>
-                        <td>{{st.CountryId}}</td>
-                        <td>{{st.TournamentId}}</td>
+                        <td>{{st.SportName}}</td>
+                        <td>{{st.CountryName}}</td>
+                        <td>{{st.TournamentName}}</td>
                         <td>
-                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId" (click)="updateLinkClick(st.SportTourtnamentId)">Update</button>
-                            <button class="btn btn-danger" (click)="removeLink(st.SportTourtnamentId)">UnLink</button>
+                            <button class="btn btn-danger" (click)="removeLink(st.SportTourtnamentId)">UnLink</button> |
+                            <button class="btn btn-primary " data-toggle="modal" data-target="#modelId" (click)="updateLinkClick(st.SportTourtnamentId)">Update</button>
                         </td>
                     </tr>
                 </tbody>

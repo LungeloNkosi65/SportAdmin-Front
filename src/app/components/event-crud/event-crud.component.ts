@@ -4,6 +4,7 @@ import { Tournament } from '../../Models/tournament';
 import { TournamentService } from '../../services/tournament.service';
 import { EventService } from '../../services/event.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import {EventVm} from '../../Models/ViewModels/eventVm';
 
 @Component({
   selector: 'app-event-crud',
@@ -12,9 +13,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class EventCrudComponent implements OnInit {
   tournaments: Tournament[];
-  tournament: Tournament;
+  Selectedtournament: Tournament;
   tournamentId: number;
-  events: Event[];
+  events: EventVm[];
   event: Event;
   eventId: number;
   eventForm:any;
@@ -25,43 +26,60 @@ export class EventCrudComponent implements OnInit {
               private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
-    this.getEvents();
     this.getTournaments();
+    this.getEvents();
     this.eventForm=this.formBuilder.group({
       EventName:['',Validators.required],
       EeventDate:['',Validators.required]
     });
   }
 
+  ngAfterContentChcked(){
+    this.Selectedtournament={
+      TournamentId:null,
+      Name:'Select Tournament'
+    }
+  }
+
   getEvents(){
     this.eventService.getEvents().subscribe((data:any)=>{
       this.events=data;
+      console.log('events', this.events);
     });
   }
 
-  getSingleEvent(eventId:number){
-    this.eventService.getSingleEvent(eventId).subscribe((data)=>{
-      this.event=data;
-    });
-  }
+  // getSingleEvent(eventId:number){
+  //   this.eventService.getSingleEvent(eventId).subscribe((data)=>{
+  //     this.event=data;
+  //   });
+  // }
   getTournaments(){
     this.tournamentService.getTournaments().subscribe((data:any)=>{
       this.tournaments=data;
+      this.Selectedtournament={
+        TournamentId:null,
+        Name:'Select Tournament'
+      }
+      // this.Selectedtournament=data[0];
+
     });
   }
 
   addEvent(event:Event){
+    console.log('UpdateId',this.eventUpdate);
     if(event!=undefined && event!=null){
-      event.TournamentId=this.tournamentId;
       if(this.eventUpdate==null){
-        event.EventId=this.events.length+1;
+        event.EventId=this.events.length+2;
+        event.TournamentId=this.tournamentId;
         this.eventService.addEvent(event).subscribe((data:any)=>{
           if(data!=null){
             this.getEvents();
+            this.tournamentId=null;
           }
         });
       }
       else{
+        event.EventId=this.eventUpdate;
         this.eventService.updateEvent(this.eventUpdate,event).subscribe((data:any)=>{
           if(data!=null){
             this.getEvents();
@@ -82,21 +100,38 @@ export class EventCrudComponent implements OnInit {
    }
 
    loadEventToEdit(eventId:number){
-     this.getSingleEvent(eventId);
-     this.eventUpdate=eventId;
+      this.eventUpdate=eventId;
+      this.eventService.getSingleEvent(eventId).subscribe((data)=>{
+      this.event=data;
+      this.tournamentId=this.event[0].TournamentId;
+      this.eventForm.controls['EventName'].setValue(this.event[0].EventName);
+      this.eventForm.controls['EeventDate'].setValue(this.event[0].EeventDate);
+    });
+     console.log('eventId passed ',eventId)
     //  this.eventForm.
    }
+
 
    onFormSubmit(){
       const formData=this.eventForm.value;
       this.addEvent(formData);
    }
 
-   getTournamentId(tournamentId:number){
-     this.tournamentId=tournamentId;
+   getTournamentId(tournamentId:any){
+     this.Selectedtournament=tournamentId;
+     this.tournamentId=this.Selectedtournament.TournamentId;
      console.log('submited id', this.tournamentId);
    }
 
+
+   changeHeading(){
+     this.eventUpdate=null;
+     this.Selectedtournament={
+      Name:"Select Tournament",
+      TournamentId:null
+    }
+    //  console.log('HEading changed to ', this.eventUpdate)
+   }
 
 
 }

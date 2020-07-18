@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import {ErrorhandlerService} from '../services/errorhandler.service';
 import { Observable } from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import { EventVm } from '../Models/ViewModels/eventVm';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class EventService {
   eventId='?eventId='
   constructor(private http:HttpClient,private errorHandler:ErrorhandlerService) { }
 
-  getEvents():Observable<Event[]>{
-    return this.http.get<Event[]>(`${this.rootUrl}${this.param}${this.paramGet}`)
+  getEvents():Observable<EventVm[]>{
+    return this.http.get<EventVm[]>(`${this.rootUrl}${this.param}${this.paramGet}`)
     .pipe(catchError(this.errorHandler.handleError));
   }
 

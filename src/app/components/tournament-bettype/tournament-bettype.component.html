@@ -1,48 +1,51 @@
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-md-12">
 
 
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
                 Add New Link
-              </button>
+            </button>
 
-              <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Link  Tournament</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <h5 class="modal-title">Link Tournament</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <form action="" [formGroup]="tournamentAssociationForm">
                                 <div class="form-group row">
                                     <div class="col-md-4">
                                         <label for="Department Name">Select Tournament</label>
-                                         <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                                        <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
                                     </div>
-                                    <div class="colo-md-8" >
-                                      <div class="dropdown open">
-                                          <button class="btn btn-secondary dropdown-toggle" type="button"
-                                              id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                              aria-expanded="false">
-                                              Select Tournament
-                                          </button>
-                                          <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;"  >
-                                              <button class="dropdown-item" *ngFor="let t of tournaments" (click)="getSportId(s.SportId)">
-                                                  {{t.Name}}</button>
-                                          </div>
-                                      </div>
+                                    <div class="colo-md-8">
+                                        <div class="dropdown open">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Select Tournament
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="triggerId"
+                                                style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;">
+                                                <button class="dropdown-item" *ngFor="let t of tournaments"
+                                                    (click)="getTournamentId(t.TournamentId)">
+                                                    {{t.Name}}</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">
                                         <label for="Country Name">Select Bet Type </label>
-                                         <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                                        <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
                                     </div>
-                                    <div class="colo-md-8" >
+                                    <div class="colo-md-8">
                                         <div class="dropdown open">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 id="triggerId" data-toggle="dropdown" aria-haspopup="true"
@@ -51,18 +54,17 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="triggerId">
                                                 <button class="dropdown-item" *ngFor="let bt of betTypes"
-                                                   (click)="getCountryId(c.CountryId)" >{{bt.BetTypeName}}</button>
+                                                    (click)="getBetTypeId(bt.BetTypeId)">{{bt.BetTypeName}}</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                              
                             </form>
-                        
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmitForm()">Save</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                (click)="onSubmitForm()">Save</button>
                         </div>
                     </div>
                 </div>
@@ -99,28 +101,24 @@
 
 
 
-
-
-
-
-            
             <table class="table table-striped">
-                <thead style="background-color: purple !important;">
+                <thead >
                     <tr>
                         <th>Id</th>
-                        <th>Tournament</th>
-                        <th>BetType</th>
+                        <th>Tournament Name</th>
+                        <th>BetType Name</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let tb of tournamentAssociations">
-                        <td>{{tb.TbTid}}</td>
-                        <td>{{tb.TournamentId}}</td>
-                        <td>{{tb.BetTypeId}}</td>
+                    <tr *ngFor="let t of tournamentAssociations">
+                        <td>{{t.TbTid}}</td>
+                        <td>{{t.TournamentName}}</td>
+                        <td>{{t.BetTypeName}}</td>
                         <td>
-                            <button class="btn btn-primary "    data-toggle="modal" data-target="#modelId"  (click)="setUpdate(tb.TbTId)">Update</button>
-                            <button class="btn btn-danger" (click)="removeLink(tb.TbTid)">UnLink</button>
+                            <button class="btn btn-primary " data-toggle="modal" data-target="#modelId"
+                                (click)="setUpdate(t.TbTId)">Update</button> |
+                            <button class="btn btn-danger" (click)="removeLink(t.TbTid)">UnLink</button>
                         </td>
 
                     </tr>

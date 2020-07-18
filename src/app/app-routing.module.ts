@@ -1,11 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DepartmentComponent } from './components/department/department.component';
-import { FacultyComponent } from './components/faculty/faculty.component';
-import { StudentsComponent } from './components/students/students.component';
-import { CourseComponent } from './components/course/course.component';
-import { HomeComponent } from './components/home/home.component';
-import { MapComponent } from './components/map/map.component';
 import { TournamentsCrudComponent } from './components/tournaments-crud/tournaments-crud.component';
 import { SportCrudComponent } from './components/sport-crud/sport-crud.component';
 import { CountryCrudComponent } from './components/country-crud/country-crud.component';
@@ -13,24 +7,25 @@ import { SportCountryComponent } from './components/sport-country/sport-country.
 import { SportTournamentComponent } from './components/sport-tournament/sport-tournament.component';
 import { TournamentBettypeComponent } from './components/tournament-bettype/tournament-bettype.component';
 import { EventCrudComponent } from './components/event-crud/event-crud.component';
-
+import { BetTypeComponent } from './components/bet-type/bet-type.component';
+import {MarketsComponent} from './components/markets/markets.component';
+import { BetTypeMarketComponent } from './components/bet-type-market/bet-type-market.component';
+import {OddsComponent} from './components/odds/odds.component';
 
 const routes: Routes = [
-  {path:'', component:HomeComponent},
-  // {path:'department',component:DepartmentComponent},
-  // {path:'faculty',component:FacultyComponent},
-  // {path:'students',component:StudentsComponent},
-  // {path:'course',component:CourseComponent},
-  // {path:'getlocation',component:MapComponent},
+  {path:'', component:SportCrudComponent},
+
   {path:'sport/tournaments', component:TournamentsCrudComponent},
   {path:'sport/sports', component:SportCrudComponent},
   {path:'sport/countries', component:CountryCrudComponent},
   {path:'sport/linkSport', component:SportCountryComponent},
   {path:'sport/linkTournament', component:SportTournamentComponent},
   {path:'sport/linkBetType', component:TournamentBettypeComponent},
-  {path:'sport/event', component:EventCrudComponent}
-
-
+  {path:'sport/event', component:EventCrudComponent},
+  {path:'sport/betType', component:BetTypeComponent},
+  {path:'sport/market', component:MarketsComponent},
+  {path:'sport/batTypeMarket', component:BetTypeMarketComponent},
+  {path:'sport/odds', component:OddsComponent}
 
 ];
 

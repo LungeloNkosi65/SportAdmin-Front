@@ -8,6 +8,7 @@ import { TournamentBettypeService } from '../../services/tournament-bettype.serv
 import { TournamentService } from '../../services/tournament.service';
 import { FormBuilder } from '@angular/forms/';
 import { throwIfEmpty } from 'rxjs/operators';
+import { TournamentBetTypeVm } from 'src/app/Models/ViewModels/tournamentBetTypeVm';
 @Component({
   selector: 'app-tournament-bettype',
   templateUrl: './tournament-bettype.component.html',
@@ -17,7 +18,7 @@ export class TournamentBettypeComponent implements OnInit {
 
   tournaments: Tournament[];
   tournament: Tournament;
-  tournamentAssociations: TournamentBetType[];
+  tournamentAssociations: TournamentBetTypeVm[];
   tournamentAssociation: TournamentBetType;
   betTypes: BetType[];
   betType: BetType;
@@ -34,9 +35,7 @@ export class TournamentBettypeComponent implements OnInit {
     this.getAssociations();
     this.getTournaments();
     this.getBetTypes();
-    this.tournamentAssociationForm = this.formBuilder.group({
 
-    });
   }
 
   getTournaments() {
@@ -52,6 +51,7 @@ export class TournamentBettypeComponent implements OnInit {
   getAssociations() {
     this.tournamentBettypeService.getTournamentBettypes().subscribe((data: any) => {
       this.tournamentAssociations = data;
+      console.log('data', data)
     });
   }
 
@@ -89,9 +89,12 @@ export class TournamentBettypeComponent implements OnInit {
   }
   getTournamentId(tournamentId: number) {
     this.tournamentId = tournamentId;
+    console.log('submited id',this.tournamentId );
   }
   getBetTypeId(betTypeId: number) {
     this.betTypeId = betTypeId;
+    console.log('submited id',this.betTypeId );
+
   }
   onSubmitForm(){
   this.localFormData={
@@ -103,6 +106,7 @@ export class TournamentBettypeComponent implements OnInit {
   }
   setUpdate(tbtId:number){
     this.tournamentUpdate=tbtId;
+    
   }
 
 }

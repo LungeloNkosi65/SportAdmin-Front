@@ -13,6 +13,7 @@ export class SportCrudComponent implements OnInit {
   sports:Sport[]=[];
   singleSport:Sport;
   sportsForm:any;
+  sportUpdate:number;
   constructor(private sportTreeService:SportTreeService,private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
@@ -31,22 +32,48 @@ export class SportCrudComponent implements OnInit {
     });
   }
 
-  getSingleSport(sportId:number){
-  }
+ loadSportToEdit(sportId:number){
+   console.log('Submited Id ',sportId);
+   this.sportTreeService.getSIngleSport(sportId).subscribe((data:any)=>{
+     this.singleSport=data;
+     this.sportUpdate=sportId;
+     this.sportsForm.controls['Name'].setValue(data[0].Name);
+     this.sportsForm.controls['Logo'].setValue(data[0].Logo);
+   })
+ }
+
+  // loadSportToEdit(sportId:number){
+  //   console.log('submited Id',sportId);
+  //   this.sportTreeService.getSIngleSport(sportId).subscribe((data:any)=>{
+  //     this.singleSport=data;
+  //     this.sportUpdate=sportId;
+  //     this.sportsForm.controls['Name'].setValue(data[0].Name);
+  //     this.sportsForm.controls['Logo'].setValue(data[0].Logo);
+  // });}
 
   addSport(sport:Sport){
     if(sport!=undefined && sport!==null){
-      sport.SportId=this.sports.length+1;
-      this.sportTreeService.addSport(sport).subscribe(()=>{
-      this.getSports();
-      });
+      if(this.sportUpdate==null){
+        sport.SportId=this.sports.length+1;
+        this.sportTreeService.addSport(sport).subscribe(()=>{
+        this.getSports();
+        });
+      }
+      else{
+        this.deleteSport(this.sportUpdate);
+      }
+    
     }
   }
 
   deleteSport(sportId:number){
-    this.sportTreeService.deleteSport(sportId).subscribe(()=>{
-      this.getSports();
-    });
+    if(window.confirm("Are you sure you want to delete record")){
+      this.sportTreeService.deleteSport(sportId).subscribe(()=>{
+        this.getSports();
+        console.log('inside Delete')
+      });
+    }
+
   }
 
   updateSport(sportId:number,sport:Sport){
@@ -56,8 +83,11 @@ export class SportCrudComponent implements OnInit {
   }
 
 
+
+
   onFormSubmit(){
     const sportData=this.sportsForm.value;
+    console.log('Data from form ',sportData);
     this.addSport(sportData);
   }
 

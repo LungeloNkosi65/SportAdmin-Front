@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-md-12">
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
-                Add Sport
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modelId">
+                Add New
             </button>
 
             <!-- Modal -->
@@ -20,20 +20,20 @@
                         </div>
                         <div class="modal-body">
                             <form action="" [formGroup]="sportsForm">
-                                <div class="row">
+                                <div class="form-group row">
                                     <div class="col-md-4">
                                         <label for="Sport Name">Sport Name</label>
                                     </div>
                                     <div class="colo-md-8">
-                                        <input type="text" placeholder="Sport Name" Name="Name" formControlName="Name">
+                                        <input type="text"  class="form-control"  placeholder="Sport Name" Name="Name" formControlName="Name">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="form-group row">
                                     <div class="col-md-4">
                                         <label for="Sport Logo">Sport Logo</label>
                                     </div>
                                     <div class="colo-md-8">
-                                        <input type="text" placeholder="Sport Logo" Name="Logo" formControlName="Logo">
+                                        <input type="text"    class="form-control"  placeholder="Sport Logo" Name="Logo" formControlName="Logo">
                                     </div>
                                 </div>
                             </form>
@@ -49,8 +49,9 @@
 
 
             <table class="table table-striped">
-                <thead class="text-white" style="background-color: purple !important;">
+                <thead class="text-black" >
                     <tr>
+                        <th>Sport Id</th>
                         <th>Sport Name</th>
                         <th>Sport Logo</th>
                         <th>Actions</th>
@@ -59,10 +60,11 @@
                 <tbody>
                    
                     <tr *ngFor="let sport of sports">
+                        <td>{{sport.SportId}}</td>
                         <td>{{sport.Name}}</td>
                         <td>
-                            <div class="card" style="height: 150px !important; background-color: purple !important;">
-                                <img class="card-img-top" src="{{sport.Logo}}" alt="Logo Not Available" style="height: 150px !important;">
+                            <div class="card" style="height: 50px !important; background-color: purple !important; width: 30% !important;">
+                                <img class="card-img-top" src="{{sport.Logo}}" alt="Logo Not Available" style="height: 50px !important;">
                                 <div class="card-body">
                                     <!-- <h4 class="card-title">Title</h4>
                                     <p class="card-text">Text</p> -->
@@ -71,9 +73,12 @@
                             <!-- <img src="{{sport.Logo}}" alt="Logo Not Available"> -->
                         </td>
                         <td>
+
+                            
                             <button type="button" class="btn btn-danger"
-                                (click)="deleteSport(sport.SportId)">Delete</button>
-                            <button type="button" class="btn btn-primary">Edit</button>
+                                (click)="deleteSport(sport.SportId)">Delete</button> |
+                            <button type="button" class="btn btn-primary"   data-toggle="modal" data-target="#modelId" 
+                             (clcik)="loadSportToEdit(sport.SportId)">Update</button>
                         </td>
                         <td></td>
                     </tr>

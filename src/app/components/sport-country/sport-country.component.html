@@ -1,10 +1,10 @@
 
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-md-12">
-    <h2>Manage Sport Counrty </h2>
+    <!-- <h2>Manage Sport Counrty </h2> -->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
   Add New Link
 </button>
 
@@ -71,8 +71,9 @@
 </div>
 
     <table class="table table-striped">
-        <thead class="text-white" style="background-color: purple !important;">
+        <thead  >
             <tr>
+                <th>Id</th>
                 <th>Sport</th>
                 <th>Country</th>
                 <th>Actions</th>
@@ -80,11 +81,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let sc of SportCountries">
-                <td>{{sc.SportId}}</td>
-                <td>{{sc.CountryId}}</td>
+                <td>{{sc.SportCountryId}}</td>
+                <td>{{sc.SportName}}</td>
+                <td>{{sc.CountryName}}</td>
                 <td>
-                    <button class="btn btn-danger" (click)="unLinkSport(sc.SportCountryId)">Unlink</button>
                     <button class="btn btn-primary" >Update</button>
+                    <button class="btn btn-danger" (click)="unLinkSport(sc.SportCountryId)">Unlink</button>|
                 </td>
             </tr>
         </tbody>

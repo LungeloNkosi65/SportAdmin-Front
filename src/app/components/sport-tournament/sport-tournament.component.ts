@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
 import { SportTreeService } from 'src/app/services/sport-tree.service';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { CountryService } from 'src/app/services/country.service';
+import {SportTournamentVm} from '../../Models/ViewModels/SportTournament';
 
 @Component({
   selector: 'app-sport-tournament',
@@ -16,7 +17,7 @@ import { CountryService } from 'src/app/services/country.service';
 })
 export class SportTournamentComponent implements OnInit {
 
-  sportTournaments: SportTournament[];
+  sportTournaments: SportTournamentVm[];
   sports: Sport[];
   tournaments: Tournament[];
   countries: Country[];

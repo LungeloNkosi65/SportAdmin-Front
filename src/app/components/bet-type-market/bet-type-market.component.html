@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="row mt-2">
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
+            Add New Link
+        </button>
+
+
+          <!-- Modal -->
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Link Market</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <form action="" [formGroup]="betTypeMarketForm">
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="Department Name">Select BetType</label>
+                             <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                        </div>
+                        <div class="colo-md-8" >
+                          <div class="dropdown open">
+                              <button class="btn btn-secondary dropdown-toggle" type="button"
+                                  id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  Select BetType
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;"  >
+                                  <button class="dropdown-item" *ngFor="let bt of betTypes" (click)="getBetTypeId(bt.BetTypeId)">
+                                      {{bt.BetTypeName}}</button>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="Country Name">Select Markert </label>
+                             <!-- <input type="text" placeholder="Country Name" formControlName="CountryName"> -->
+                        </div>
+                        <div class="colo-md-8" >
+                            <div class="dropdown open">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Select Market
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;">
+                                    <button class="dropdown-item" *ngFor="let m of markets"
+                                       (click)="getMarketId(m.MarketId)" >{{m.MarketName}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              
+                </form>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onformSubmit()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead >
+                    <tr>
+                        <th>Id</th>
+                        <!-- <th>BetType Id</th> -->
+                        <th>BetType Name</th>
+                        <!-- <th>Market Id</th> -->
+                        <th>Market Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let btm of betTypeMarkets">
+                        <td>{{btm.BetTypeMarketId}}</td>
+                        <!-- <td>{{btm.BetTypeId}}</td> -->
+                        <td>{{btm.BetTypeName}}</td>
+                        <!-- <td>{{btm.MarketId}}</td> -->
+                        <td>{{btm.MarketName}}</td>
+                        <td>
+                            <button class="btn btn-primary">Update</button>|
+                            <button class="btn btn-danger" (click)="deleteAssociation(btm.BetTypeMarketId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { Country } from 'src/app/Models/country';
 import { Sport } from 'src/app/Models/sport';
 import { SportTreeService } from 'src/app/services/sport-tree.service';
 import { CountryService } from 'src/app/services/country.service';
+import { SportCountryVm } from 'src/app/Models/ViewModels/sportCountryVm';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { CountryService } from 'src/app/services/country.service';
   styleUrls: ['./sport-country.component.css']
 })
 export class SportCountryComponent implements OnInit {
-  SportCountries: SportCountry[];
+  SportCountries: SportCountryVm[];
   sportCountry: SportCountry;
   sportCountryForm: any;
   countries: Country[];
@@ -25,6 +26,7 @@ export class SportCountryComponent implements OnInit {
   countryId: number = null;
   dataFromForm: SportCountry;
   updateOption: boolean = false;
+
   constructor(private sportCountryService: SportsCountryService, private formBuilder: FormBuilder,
     private sportService: SportTreeService, private countryService: CountryService) { }
 

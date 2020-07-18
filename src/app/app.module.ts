@@ -3,19 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AgmCoreModule } from '@agm/core';
-import { AgmDirectionModule} from 'agm-direction'; // agm-direction
 import { AppRoutingModule } from './app-routing.module';
-import { AddBookingComponent } from './components/add-booking/add-booking.component';
-import { CounterComponent } from './components/counter/counter.component';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
-import { HomeComponent } from './components/home/home.component';
-import { MapComponent } from './components/map/map.component';
-import { NavMenueComponent } from './components/nav-menue/nav-menue.component';
-import { CourseComponent } from './components/course/course.component';
-import { FacultyComponent } from './components/faculty/faculty.component';
-import { DepartmentComponent } from './components/department/department.component';
-import { StudentsComponent } from './components/students/students.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TournamentsCrudComponent } from './components/tournaments-crud/tournaments-crud.component';
 import { SportCrudComponent } from './components/sport-crud/sport-crud.component';
@@ -25,6 +13,11 @@ import { SportTournamentComponent } from './components/sport-tournament/sport-to
 import { TournamentEventComponent } from './components/tournament-event/tournament-event.component';
 import { TournamentBettypeComponent } from './components/tournament-bettype/tournament-bettype.component';
 import { EventCrudComponent } from './components/event-crud/event-crud.component';
+import { BetTypeComponent } from './components/bet-type/bet-type.component';
+import { BetTypeMarketComponent } from './components/bet-type-market/bet-type-market.component';
+import { MarketsComponent } from './components/markets/markets.component';
+import { OddsComponent } from './components/odds/odds.component';
+import {CommonModule} from '@angular/common';
 @NgModule({
   imports:      [ 
     BrowserModule,
@@ -34,13 +27,13 @@ import { EventCrudComponent } from './components/event-crud/event-crud.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AgmCoreModule.forRoot({ //@agm/core
-      apiKey: 'AIzaSyDdl92Jhloy3TczguBxXwqD5AH3m2oCNY0',
-       libraries: ["places"]
-    }),
-    AgmDirectionModule //agm-direction
+    FormsModule,
+ 
      ],
-  declarations: [ AppComponent, AddBookingComponent, CounterComponent, FetchDataComponent, HomeComponent, MapComponent, NavMenueComponent, CourseComponent, FacultyComponent, DepartmentComponent, StudentsComponent, TournamentsCrudComponent, SportCrudComponent, CountryCrudComponent, SportCountryComponent, SportTournamentComponent, TournamentEventComponent, TournamentBettypeComponent, EventCrudComponent ],
+  declarations: [ AppComponent, TournamentsCrudComponent, 
+    SportCrudComponent, CountryCrudComponent, SportCountryComponent, 
+    SportTournamentComponent, TournamentEventComponent, TournamentBettypeComponent,
+     EventCrudComponent, BetTypeComponent, BetTypeMarketComponent, MarketsComponent, OddsComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

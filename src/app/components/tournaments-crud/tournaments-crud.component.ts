@@ -13,6 +13,8 @@ export class TournamentsCrudComponent implements OnInit {
 
   tournamentForm:any;
   tournaments:Tournament[];
+  tournament:Tournament;
+  tournamentUpdate:number;
   constructor( private tournamentService:TournamentService, private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
@@ -34,14 +36,35 @@ export class TournamentsCrudComponent implements OnInit {
 
   addTournament(tournament:Tournament){
     if(tournament!=undefined || tournament!=null){
-      tournament.TournamentId=this.tournaments.length+1;
-      console.log('data submited',tournament)
-      this.tournamentService.addTournamen(tournament).subscribe(()=>{
-        this.getTournaments();
-      });
+      if(this.tournamentUpdate==null){
+        tournament.TournamentId=this.tournaments.length+1;
+        console.log('data submited',tournament)
+        this.tournamentService.addTournamen(tournament).subscribe(()=>{
+          this.getTournaments();
+          this.clearForm();
+        });
+      }
+      else{
+        tournament.TournamentId=this.tournamentUpdate;
+        this.tournamentService.updateTournament(this.tournamentUpdate,tournament).subscribe((data:any)=>{
+          this.getTournaments();
+          this.clearForm();
+          this.tournamentUpdate=null;
+        });
+      }
+    
     }
   }
 
+
+  loadTournamentToEdit(tournamentId:number){
+    console.log('submited Id', tournamentId);
+    this.tournamentUpdate=tournamentId;
+    this.tournamentService.getSingleTournament(tournamentId).subscribe((data:any)=>{
+      this.tournament=data;
+      this.tournamentForm.controls['Name'].setValue(data[0].Name);
+    })
+  }
   getTournaments(){
     this.tournamentService.getTournaments().subscribe((data:any)=>{
       this.tournaments=data;
@@ -53,6 +76,10 @@ export class TournamentsCrudComponent implements OnInit {
     const tournamentData=this.tournamentForm.value;
     this.addTournament(tournamentData);
     return tournamentData;
+  }
+
+  clearForm(){
+    this.tournamentForm.reset();
   }
 
 }
