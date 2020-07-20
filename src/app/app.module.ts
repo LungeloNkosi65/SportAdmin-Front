@@ -28,6 +28,7 @@ import {CommonModule} from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     FormsModule,
+    CommonModule
  
      ],
   declarations: [ AppComponent, TournamentsCrudComponent, 

@@ -32,6 +32,7 @@ export class EventCrudComponent implements OnInit {
       EventName:['',Validators.required],
       EeventDate:['',Validators.required]
     });
+    // this.tournaments.lenghtl
   }
 
   ngAfterContentChcked(){

@@ -11,6 +11,7 @@ export class SportTreeService {
   rootUrl = environment.sportsApiUrl;
   param = 'sports'
   sportId = '?sportId='
+  paramSingle='/GetSingle';
   private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   constructor(private http: HttpClient) { }
 
@@ -18,7 +19,7 @@ export class SportTreeService {
     return this.http.get<Sport[]>(`${this.rootUrl}${this.param}`)
   }
   getSIngleSport(sportId: number): Observable<Sport> {
-    return this.http.get<Sport>(`${this.rootUrl}${this.param}${this.sportId}${sportId}`)
+    return this.http.get<Sport>(`${this.rootUrl}${this.param}${this.paramSingle}${this.sportId}${sportId}`)
   }
   addSport(sport: Sport) {
    return this.http.post(`${this.rootUrl}${this.param}`,sport,this.httpOptions);

@@ -14,7 +14,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Link Sport With Country</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="changeHeading()">
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
@@ -31,10 +31,10 @@
                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                     id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    Select Sport
+                                    {{Selectedsport.Name}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;"  >
-                                    <button class="dropdown-item" *ngFor="let s of sports" (click)="getSportId(s.SportId)">
+                                    <button class="dropdown-item" *ngFor="let s of sports" (click)="getSportId(s)">
                                         {{s.Name}}</button>
                                 </div>
                             </div>
@@ -50,11 +50,12 @@
                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                     id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    Select Counrty
+                                    {{Selectedcountry.CountryName}}
+                                    <!-- Select Counrty -->
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;">
                                     <button class="dropdown-item" *ngFor="let c of countries"
-                                       (click)="getCountryId(c.CountryId)" >{{c.CountryName}}</button>
+                                       (click)="getCountryId(c)" >{{c.CountryName}}</button>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +64,7 @@
             
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="changeHeading()">Close</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onFormSubmit()">Save</button>
             </div>
         </div>
@@ -85,8 +86,8 @@
                 <td>{{sc.SportName}}</td>
                 <td>{{sc.CountryName}}</td>
                 <td>
-                    <button class="btn btn-primary" >Update</button>
-                    <button class="btn btn-danger" (click)="unLinkSport(sc.SportCountryId)">Unlink</button>|
+                    <button class="btn btn-primary" (click)="loadFormToEdit(sc.SportCountryId)" data-toggle="modal" data-target="#modelId">Update</button>|
+                    <button class="btn btn-danger" (click)="unLinkSport(sc.SportCountryId)">Unlink</button>
                 </td>
             </tr>
         </tbody>

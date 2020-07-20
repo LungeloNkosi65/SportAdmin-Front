@@ -22,10 +22,12 @@ export class SportCountryComponent implements OnInit {
   sports: Sport[];
   sport: Sport;
   country: Country;
+  Selectedcountry: Country;
+  Selectedsport: Sport;
   sportId: number = null;
   countryId: number = null;
   dataFromForm: SportCountry;
-  updateOption: boolean = false;
+  updateOption:number;
 
   constructor(private sportCountryService: SportsCountryService, private formBuilder: FormBuilder,
     private sportService: SportTreeService, private countryService: CountryService) { }
@@ -35,8 +37,15 @@ export class SportCountryComponent implements OnInit {
     this.getCountries();
     this.getSports();
     this.sportCountryForm = this.formBuilder.group({
-
     });
+  }
+
+  ngAfterContentChecked(){
+    // this.Selectedcountry={
+    //   CountryId:null,
+    //   CountryName:'Select Country',
+    //   Flag:null
+    // };
   }
   getSportCountry() {
     this.sportCountryService.getSportCountries().subscribe((data: any) => {
@@ -47,11 +56,23 @@ export class SportCountryComponent implements OnInit {
 
   addSportToCountry(sportCountry: SportCountry) {
     if (sportCountry != undefined && sportCountry != null) {
-      this.sportCountryService.addSportToCountry(sportCountry).subscribe(() => {
-        this.getSportCountry();
-        this.sportId = null;
-        this.countryId = null;
-      });
+      if(this.updateOption==null){
+        this.sportCountryService.addSportToCountry(sportCountry).subscribe(() => {
+          this.getSportCountry();
+          this.sportId = null;
+          this.countryId = null;
+          this.changeHeading();
+        });
+      }
+      else{
+        sportCountry.CountryId=this.Selectedcountry.CountryId;
+        sportCountry.SportId=this.Selectedsport.SportId;
+        sportCountry.SportCountryId=this.updateOption;
+           this.sportCountryService.updateSportCountryLink(this.updateOption,sportCountry).subscribe(()=>{
+             this.changeHeading();
+           });
+      }
+   
     }
   }
 
@@ -68,16 +89,25 @@ export class SportCountryComponent implements OnInit {
   }
 
   getSports() {
+    this.Selectedsport={
+      SportId:null,
+      Name:'Select Sport',
+      Logo:null
+    };
     this.sportService.getSports().subscribe((data: any) => {
       this.sports = data;
-      console.log('Sports', this.sports);
+      // console.log('Sports', this.sports);
     });
   }
   getCountries() {
+    this.Selectedcountry={
+      CountryId:null,
+      CountryName: 'Select Country',
+      Flag:null
+    };
     this.countryService.getCountries().subscribe((data: any) => {
       this.countries = data;
-      console.log('Country', this.countries);
-
+      // console.log('Country', this.countries);
     });
   }
 
@@ -93,23 +123,30 @@ export class SportCountryComponent implements OnInit {
   getReferenceCounrtry(){
    this.countryService.getSingleCountry(this.countryId).subscribe((data:any)=>{
      this.country=data;
+     this.Selectedcountry=data[0];
      console.log('reference country',this.country);
-   })
+   });
   }
   getReferenceSPort(){
+    console.log('sportId',this.sportId);
     this.sportService.getSIngleSport(this.sportId).subscribe((data:any)=>{
       this.sport=data;
-      console.log('reference sport', this.sport);
-    })
+      this.Selectedsport=data[0];
+      console.log('reference sport', this.Selectedsport);
+    });
   }
 
-  getSportId(sportID: number) {
-    this.sportId = sportID;
+  getSportId(sport: any) {
+    this.Selectedsport=sport
+    this.sportId = sport.SportId;
     console.log('sportId', this.sportId);
+    console.log('sport for dropdown', this.Selectedsport);
   }
-  getCountryId(countryId: number) {
-    this.countryId = countryId;
+  getCountryId(country:any) {
+    this.Selectedcountry=country;
+    this.countryId = country.CountryId;
     console.log('countryId', this.countryId);
+    console.log('country for dropdown',this.Selectedcountry);
   }
 
   onFormSubmit() {
@@ -124,6 +161,36 @@ export class SportCountryComponent implements OnInit {
     }
     console.log('this is what i am adding ', this.dataFromForm);
     this.addSportToCountry(this.dataFromForm);
+  }
+
+      loadFormToEdit(sportCountryId:number){
+        this.updateOption=sportCountryId;
+       this.sportCountryService.getSingleSportCountry(sportCountryId).subscribe((data:any)=>{
+         this.sportCountry=data;
+         console.log('Db record',this.sportCountry);
+         this.sportId=data[0].SportId;
+         this.countryId=data[0].CountryId;
+         this.getReferenceCounrtry();
+         this.getReferenceSPort();
+       });
+
+      }
+
+
+
+
+  changeHeading(){
+    this.Selectedcountry={
+      CountryId:null,
+      CountryName: 'Select Country',
+      Flag:null
+    };
+    this.Selectedsport={
+      SportId:null,
+      Name:'Select Sport',
+      Logo:null
+    }
+
   }
 
 }

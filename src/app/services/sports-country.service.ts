@@ -13,7 +13,7 @@ export class SportsCountryService {
  rootUrl=environment.sportsApiUrl;
  param='SportsCountries';
  pramGet='/GetZonke';
- eventId='?sportCountryId=';
+ sportCountrId='?sportCountryId=';
   constructor(private http:HttpClient, private errorHander:ErrorhandlerService) { }
 
   getSportCountries():Observable<SportCountryVm[]>{
@@ -26,9 +26,13 @@ export class SportsCountryService {
   }
 
   getSingleSportCountry(sportCountrId:number):Observable<SportCountry>{
-    return this.http.get<SportCountry>(`${this.rootUrl}${this.param}${sportCountrId}${sportCountrId}`);
+    return this.http.get<SportCountry>(`${this.rootUrl}${this.param}/GetSingle${this.sportCountrId}${sportCountrId}`);
   }
   deleteSportCountry(sportCountrId:number){
-    return this.http.delete(`${this.rootUrl}${this.param}${this.eventId}${sportCountrId}`);
+    return this.http.delete(`${this.rootUrl}${this.param}${this.sportCountrId}${sportCountrId}`);
+  }
+
+  updateSportCountryLink(sportCountryId:number,sportCountry:SportCountry){
+    return this.http.put(`${this.rootUrl}${this.param}${this.sportCountrId}${sportCountryId}`,sportCountry);
   }
 }
