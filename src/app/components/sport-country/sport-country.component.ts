@@ -68,6 +68,7 @@ export class SportCountryComponent implements OnInit {
         sportCountry.CountryId=this.Selectedcountry.CountryId;
         sportCountry.SportId=this.Selectedsport.SportId;
         sportCountry.SportCountryId=this.updateOption;
+        // console.log('Update db with this', sportCountry);
            this.sportCountryService.updateSportCountryLink(this.updateOption,sportCountry).subscribe(()=>{
              this.changeHeading();
            });
@@ -124,7 +125,7 @@ export class SportCountryComponent implements OnInit {
    this.countryService.getSingleCountry(this.countryId).subscribe((data:any)=>{
      this.country=data;
      this.Selectedcountry=data[0];
-     console.log('reference country',this.country);
+    //  console.log('reference country',this.country);
    });
   }
   getReferenceSPort(){
@@ -132,21 +133,21 @@ export class SportCountryComponent implements OnInit {
     this.sportService.getSIngleSport(this.sportId).subscribe((data:any)=>{
       this.sport=data;
       this.Selectedsport=data[0];
-      console.log('reference sport', this.Selectedsport);
+      // console.log('reference sport', this.Selectedsport);
     });
   }
 
   getSportId(sport: any) {
     this.Selectedsport=sport
     this.sportId = sport.SportId;
-    console.log('sportId', this.sportId);
-    console.log('sport for dropdown', this.Selectedsport);
+    // console.log('sportId', this.sportId);
+    // console.log('sport for dropdown', this.Selectedsport);
   }
   getCountryId(country:any) {
     this.Selectedcountry=country;
     this.countryId = country.CountryId;
-    console.log('countryId', this.countryId);
-    console.log('country for dropdown',this.Selectedcountry);
+    // console.log('countryId', this.countryId);
+    // console.log('country for dropdown',this.Selectedcountry);
   }
 
   onFormSubmit() {
@@ -156,10 +157,10 @@ export class SportCountryComponent implements OnInit {
       SportCountryId: this.SportCountries.length + 2,
       SportId: this.sportId,
       CountryId: this.countryId,
-      Country: this.country,
-      Sport: this.sport
+      // Country: this.country,
+      // Sport: this.sport
     }
-    console.log('this is what i am adding ', this.dataFromForm);
+    // console.log('this is what i am adding ', this.dataFromForm);
     this.addSportToCountry(this.dataFromForm);
   }
 
@@ -167,7 +168,7 @@ export class SportCountryComponent implements OnInit {
         this.updateOption=sportCountryId;
        this.sportCountryService.getSingleSportCountry(sportCountryId).subscribe((data:any)=>{
          this.sportCountry=data;
-         console.log('Db record',this.sportCountry);
+        //  console.log('Db record',this.sportCountry);
          this.sportId=data[0].SportId;
          this.countryId=data[0].CountryId;
          this.getReferenceCounrtry();

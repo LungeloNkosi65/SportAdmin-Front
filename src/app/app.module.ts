@@ -27,8 +27,6 @@ import {CommonModule} from '@angular/common';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule,
-    CommonModule
  
      ],
   declarations: [ AppComponent, TournamentsCrudComponent, 

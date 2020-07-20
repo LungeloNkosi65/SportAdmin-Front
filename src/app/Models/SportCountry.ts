@@ -5,6 +5,6 @@ export interface SportCountry{
     SportCountryId:number,
     SportId:number;
     CountryId:number;
-    Country:Country;
-    Sport:Sport;
+    // Country:Country;
+    // Sport:Sport;
 }
