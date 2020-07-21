@@ -35,7 +35,7 @@ export class TournamentBettypeService {
   }
 
   updateLink(tbId:number,tournamentBetType:TournamentBetType){
-    return this.http.delete(`${this.rootUrl}${this.param}${this.tournamentBetTypeId}${tbId}`);
+    return this.http.put(`${this.rootUrl}${this.param}${this.tournamentBetTypeId}${tbId}`,tournamentBetType);
   }
 
 }

@@ -11,6 +11,7 @@ export class TournamentService {
   rootUrl=environment.sportsApiUrl;
   paramp='Tournaments';
   tournamentId='?tournamentId=';
+  paramGet='/GetAll';
 
   private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   constructor(private httpClinet:HttpClient) { }
@@ -30,7 +31,7 @@ export class TournamentService {
     return this.httpClinet.put(`${this.rootUrl}${this.paramp}${this.tournamentId}${tournamentId}`,tournamentId,this.httpOptions);
   }
   getTournaments():Observable<Tournament[]>{
-    return this.httpClinet.get<Tournament[]>(`${this.rootUrl}${this.paramp}`);
+    return this.httpClinet.get<Tournament[]>(`${this.rootUrl}${this.paramp}${this.paramGet}`);
   }
 
 }

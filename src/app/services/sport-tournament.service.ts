@@ -25,7 +25,7 @@ export class SportTournamentService {
   }
 
   getSingleAssociation(sportTournamentId:number):Observable<SportTournament>{
-   return this.http.get<SportTournament>(`${this.rootUrl}${this.param}${this.paramGet}${this.sportTournamentId}${sportTournamentId}`);
+   return this.http.get<SportTournament>(`${this.rootUrl}${this.param}${this.sportTournamentId}${sportTournamentId}`);
    
   }
   addSportTournament(sportTournament:SportTournament){
