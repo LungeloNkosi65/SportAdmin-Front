@@ -42,38 +42,28 @@ export class SportCrudComponent implements OnInit {
    })
  }
 
-  // loadSportToEdit(sportId:number){
-  //   console.log('submited Id',sportId);
-  //   this.sportTreeService.getSIngleSport(sportId).subscribe((data:any)=>{
-  //     this.singleSport=data;
-  //     this.sportUpdate=sportId;
-  //     this.sportsForm.controls['Name'].setValue(data[0].Name);
-  //     this.sportsForm.controls['Logo'].setValue(data[0].Logo);
-  // });}
 
   addSport(sport:Sport){
     if(sport!=undefined && sport!==null){
       if(this.sportUpdate==null){
         sport.SportId=this.sports.length+1;
-        this.sportTreeService.addSport(sport).subscribe(()=>{
-        this.getSports();
+        this.sportTreeService.addSport(sport).subscribe((data:any)=>{
+          alert(data.text);
+          this.getSports();
         this.setHeading();
         });
       }
       else{
-        if(window.confirm("Are you sure you want to update this record")){
           sport.SportId=this.sportUpdate;
           this.updateSport(this.sportUpdate,sport);
-        }
-   
       }
-    
     }
   }
 
   deleteSport(sportId:number){
     if(window.confirm("Are you sure you want to delete record")){
-      this.sportTreeService.deleteSport(sportId).subscribe(()=>{
+      this.sportTreeService.deleteSport(sportId).subscribe((data:any)=>{
+        alert(data.text);
         this.getSports();
         // console.log('inside Delete')
       });
@@ -82,7 +72,8 @@ export class SportCrudComponent implements OnInit {
   }
 
   updateSport(sportId:number,sport:Sport){
-    this.sportTreeService.updateSport(sportId,sport).subscribe(()=>{
+    this.sportTreeService.updateSport(sportId,sport).subscribe((data:any)=>{
+      alert(data.text);
       this.getSports();
       this.setHeading();
     });

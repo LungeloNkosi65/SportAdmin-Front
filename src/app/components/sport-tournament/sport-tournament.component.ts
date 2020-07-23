@@ -80,7 +80,7 @@ export class SportTournamentComponent implements OnInit {
   getSporTournaments() {
     this.sportTournamentService.getSportTournaments().subscribe((data: any) => {
       this.sportTournaments = data;
-      console.log('sportTournaments', this.sportTournaments);
+      // console.log('sportTournaments', this.sportTournaments);
     });
   }
 
@@ -88,15 +88,19 @@ export class SportTournamentComponent implements OnInit {
 
     if (sportTournament != undefined && sportTournament != null) {
       if (this.sportTournamentUpdate == null) {
-        this.sportTournamentService.addSportTournament(sportTournament).subscribe(() => {
+        this.sportTournamentService.addSportTournament(sportTournament).subscribe((data:any) => {
           this.getSporTournaments();
+          alert(data.text);
         });
       }
       else {
+        // console.log('sportUpdateId', this.sportTournamentUpdate)
+        sportTournament.SportTourtnamentId=this.sportTournamentUpdate;
         sportTournament.CountryId=this.Selectedcountry.CountryId;
         sportTournament.SportId=this.Selectedsport.SportId;
         sportTournament.TournamentId=this.Selectedtournament.TournamentId;
         this.updateLink(this.sportTournamentUpdate, sportTournament);
+
       }
 
     }
@@ -104,16 +108,19 @@ export class SportTournamentComponent implements OnInit {
 
   removeLink(sportTournamentId: number) {
     if (window.confirm("Are you sure you want to remove the link")) {
-      this.sportTournamentService.deleteSportTournament(sportTournamentId).subscribe(() => {
+      this.sportTournamentService.deleteSportTournament(sportTournamentId).subscribe((data:any) => {
         this.getSporTournaments();
+        alert(data.text);
       });
     }
 
   }
   updateLink(sportTournamentId: number, sportTournament: SportTournament) {
-    this.sportTournamentService.updateSportTournament(sportTournamentId, sportTournament).subscribe(() => {
+    this.sportTournamentService.updateSportTournament(sportTournamentId, sportTournament).subscribe((data:any) => {
+     console.log(data);
       this.getSporTournaments();
       this.sportTournamentUpdate = null;
+      alert(data.text);
     });
   }
 
@@ -121,7 +128,7 @@ export class SportTournamentComponent implements OnInit {
     this.sportTournamentUpdate=sportTournamentId;
     this.sportTournamentService.getSingleAssociation(sportTournamentId).subscribe((data: any) => {
       this.sportTournament = data;
-      console.log('Edit this record',data);
+      // console.log('Edit this record',data);
       this.getDataForDropdown(data[0].SportId,data[0].TournamentId,data[0].CountryId);
     });
   }
@@ -129,15 +136,15 @@ export class SportTournamentComponent implements OnInit {
   getSportId(sport: any) {
     this.Selectedsport=sport;
     this.sportId = sport.SportId;
-    console.log('submited sportId', this.Selectedsport);
+    // console.log('submited sportId', this.Selectedsport);
   }
   getCountryId(country: any) {
     this.Selectedcountry=country;
     this.countryId = country.CountryId;
-    console.log('submited country', this.Selectedcountry)
+    // console.log('submited country', this.Selectedcountry)
   }
   getTournamentId(tournament: any) {
-    console.log('submited tournament', tournament);
+    // console.log('submited tournament', tournament);
     this.Selectedtournament = tournament;
     this.tournamentId = tournament.TournamentId;
   }
@@ -158,7 +165,7 @@ export class SportTournamentComponent implements OnInit {
 
 
   getDataForDropdown(sportId:number,tournamentId:number,countryId:number){
-    console.log('TournamentId passed',tournamentId)
+    // console.log('TournamentId passed',tournamentId)
     this.sportService.getSIngleSport(sportId).subscribe((data:any)=>{
       this.Selectedsport=data[0];
     });
@@ -168,7 +175,7 @@ export class SportTournamentComponent implements OnInit {
 
     this.tournamentService.getSingleTournament(tournamentId).subscribe((data:any)=>{
       this.Selectedtournament=data[0];
-      console.log('Tournament To Edit',data[0]);
+      // console.log('Tournament To Edit',data[0]);
     });
   }
 

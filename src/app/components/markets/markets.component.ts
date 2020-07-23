@@ -27,7 +27,7 @@ export class MarketsComponent implements OnInit {
   getMarkets() {
     this.marketService.getMarkets().subscribe((data: any) => {
       this.markets = data;
-      console.log('retrieved', this.markets);
+      // console.log('retrieved', this.markets);
     });
   }
 
@@ -69,7 +69,7 @@ export class MarketsComponent implements OnInit {
   loadFrom(marketId: number) {
     this.updateMarket = marketId;
     this.marketService.getSingleMarket(marketId).subscribe((data: any) => {
-      console.log('I found this', data);
+      // console.log('I found this', data);
       this.marketForm.controls['MarketName'].setValue(data[0].MarketName)
     });
   }

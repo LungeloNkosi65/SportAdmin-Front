@@ -85,10 +85,9 @@ export class OddsComponent implements OnInit {
         odd.EventId=this.eventId;
         odd.BetTypeMarketId=this.btmId;
         this.oddsService.addOdds(odd).subscribe((data:any)=>{
-          if(data!=null){
+            alert(data.text);
             this.getOdds();
             this.setHeading();
-          }
         });
       }
       else{
@@ -102,6 +101,7 @@ export class OddsComponent implements OnInit {
             this.getOdds();
             this.oddsUpdate=null;
             this.clearForm();
+            alert(data.text);
           }
         });
       }
@@ -163,7 +163,8 @@ getSingleEvent(eventId){
 
   delete(oddId:number){
     if(window.confirm("Are you sure you want to delete record")){
-      this.oddsService.deleteOdd(oddId).subscribe(()=>{
+      this.oddsService.deleteOdd(oddId).subscribe((data:any)=>{
+        alert(data.text);
         this.getOdds();
       });
     }

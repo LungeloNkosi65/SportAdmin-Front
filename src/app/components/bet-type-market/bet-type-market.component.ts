@@ -82,7 +82,9 @@ export class BetTypeMarketComponent implements OnInit {
         betTypeMarket.BetTypeMarketId=this.betTypeMarketUpdate;
         betTypeMarket.MarketId=this.selectedMarket.MarketId;
         betTypeMarket.BetTypeId=this.selectedBetType.BetTypeId;
-        this.betTyMarketService.updateAssociations(this.betTypeMarketUpdate,betTypeMarket).subscribe(()=>{
+        this.betTyMarketService.updateAssociations(this.betTypeMarketUpdate,betTypeMarket).subscribe((data:any)=>{
+         alert(data.text);
+         console.log(data);
           this.setHeading();
           this.getBettypeAssociations();
         });

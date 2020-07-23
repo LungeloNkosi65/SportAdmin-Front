@@ -50,14 +50,16 @@ export class SportCountryComponent implements OnInit {
   getSportCountry() {
     this.sportCountryService.getSportCountries().subscribe((data: any) => {
       this.SportCountries = data;
-      console.log('Linked Ids', this.SportCountries);
+      // console.log('Linked Ids', this.SportCountries);
     });
   }
 
   addSportToCountry(sportCountry: SportCountry) {
     if (sportCountry != undefined && sportCountry != null) {
       if(this.updateOption==null){
-        this.sportCountryService.addSportToCountry(sportCountry).subscribe(() => {
+        this.sportCountryService.addSportToCountry(sportCountry).subscribe((data:any) => {
+          console.log(data);
+          alert(data.text);
           this.getSportCountry();
           this.sportId = null;
           this.countryId = null;
@@ -69,8 +71,11 @@ export class SportCountryComponent implements OnInit {
         sportCountry.SportId=this.Selectedsport.SportId;
         sportCountry.SportCountryId=this.updateOption;
         // console.log('Update db with this', sportCountry);
-           this.sportCountryService.updateSportCountryLink(this.updateOption,sportCountry).subscribe(()=>{
-             this.changeHeading();
+           this.sportCountryService.updateSportCountryLink(this.updateOption,sportCountry).subscribe((data:any)=>{
+            console.log(data.text);
+            alert(data.text);
+            this.getSportCountry();
+            this.changeHeading();
            });
       }
    
@@ -113,9 +118,10 @@ export class SportCountryComponent implements OnInit {
   }
 
   unLinkSport(sortCountryId:number){
-    if(window.confirm("Are you sure you want to unlink sport eith country")){
-      this.sportCountryService.deleteSportCountry(sortCountryId).subscribe(()=>{
+    if(window.confirm("Are you sure you want to unlink sport with country")){
+      this.sportCountryService.deleteSportCountry(sortCountryId).subscribe((data:any)=>{
         this.getSportCountry();
+        alert(data.text);
       });
     }
   

@@ -27,7 +27,7 @@ export class BetTypeComponent implements OnInit {
   getBetTypes() {
     this.betTypeService.getBeTypes().subscribe((data: any) => {
       this.betTypes = data;
-      console.log('Bet Types', this.betTypes);
+      // console.log('Bet Types', this.betTypes);
     });
   }
 
@@ -78,7 +78,7 @@ export class BetTypeComponent implements OnInit {
     console.log('Id', betTypeId);
     this.betTypeService.getSingleBetType(betTypeId).subscribe((data:any)=>{
       this.betTypeLocal=data;
-      console.log('this is what i found');
+      // console.log('this is what i found');
       this.betTypeForm.controls['BetTypeName'].setValue(data[0].BetTypeName);
       this.betTypeUpdate=betTypeId;
     });

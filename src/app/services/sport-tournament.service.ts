@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {ErrorhandlerService} from '../services/errorhandler.service';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {SportTournamentVm} from '../Models/ViewModels/SportTournament';
 
 @Injectable({
@@ -25,17 +25,41 @@ export class SportTournamentService {
   }
 
   getSingleAssociation(sportTournamentId:number):Observable<SportTournament>{
-   return this.http.get<SportTournament>(`${this.rootUrl}${this.param}${this.sportTournamentId}${sportTournamentId}`);
+   return this.http.get<SportTournament>(`${this.rootUrl}${this.param}${this.sportTournamentId}${sportTournamentId}`)
+   .pipe(
+    map((data:any)=>{
+      return data;
+    }),
+    catchError(this.errorHanlder.handleCrudError)
+  );
    
   }
   addSportTournament(sportTournament:SportTournament){
-    return this.http.post(`${this.rootUrl}${this.param}`,sportTournament);
+    return this.http.post(`${this.rootUrl}${this.param}`,sportTournament)
+    .pipe(
+      map((data:any)=>{
+        return data;
+      }),
+      catchError(this.errorHanlder.handleCrudError)
+    );
   }
   deleteSportTournament(sportTournamentId:number){
-    return this.http.delete(`${this.rootUrl}${this.param}${this.sportTournamentId}${sportTournamentId}`);
+    return this.http.delete(`${this.rootUrl}${this.param}${this.sportTournamentId}${sportTournamentId}`)
+    .pipe(
+      map((data:any)=>{
+        return data;
+      }),
+      catchError(this.errorHanlder.handleCrudError)
+    );
   }
 
   updateSportTournament(sportTournamentId:number,sportTournament:SportTournament){
-    return this.http.put(`${this.rootUrl}${this.param}${this.sportTournamentId}${sportTournament}`,sportTournament);
+    return this.http.put(`${this.rootUrl}${this.param}${this.sportTournamentId}${sportTournamentId}`,sportTournament)
+    .pipe(
+      map((data:any)=>{
+        return data;
+      }),
+      catchError(this.errorHanlder.handleCrudError)
+    );
   }
 }
