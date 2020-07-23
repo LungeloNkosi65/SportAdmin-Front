@@ -36,14 +36,16 @@ formHeading:string;
       if(this.countryUpdate==null){
         country.CountryId=this.countries.length+1;
         this.countryService.addCountry(country).subscribe(()=>{
-        });
+          this.setHeading();
         this.getCountries();
+        });
       }
       else{
         country.CountryId=this.countryUpdate;
         this.countryService.updateCountry(this.countryUpdate,country).subscribe(()=>{
           this.getCountries();
-          this.countryUpdate=null;
+          this.setHeading();
+         
         })
       }
     }
@@ -88,6 +90,7 @@ formHeading:string;
 
   setHeading(){
     this.countryUpdate=null;
+    this.resertForm();
   }
 
 }

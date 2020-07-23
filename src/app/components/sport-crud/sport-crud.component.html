@@ -13,8 +13,13 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Add Sport</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <ng-template [ngIf]="sportUpdate==null">
+                                <h5 class="modal-title">Add Sport</h5>
+                            </ng-template>
+                            <ng-template [ngIf]="sportUpdate!=null">
+                                <h5 class="modal-title">Update Sport</h5>
+                            </ng-template>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="setHeading()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -39,7 +44,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-modal-dismis" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary btn-modal-dismis" data-dismiss="modal" (click)="setHeading()">Close</button>
                             <button type="submit" class="btn btn-primary" data-dismiss="modal"
                                 (click)="onFormSubmit()">Save</button>
                         </div>

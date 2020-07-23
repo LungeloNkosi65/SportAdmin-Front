@@ -57,6 +57,7 @@ export class SportCrudComponent implements OnInit {
         sport.SportId=this.sports.length+1;
         this.sportTreeService.addSport(sport).subscribe(()=>{
         this.getSports();
+        this.setHeading();
         });
       }
       else{
@@ -83,6 +84,7 @@ export class SportCrudComponent implements OnInit {
   updateSport(sportId:number,sport:Sport){
     this.sportTreeService.updateSport(sportId,sport).subscribe(()=>{
       this.getSports();
+      this.setHeading();
     });
   }
 
@@ -93,6 +95,13 @@ export class SportCrudComponent implements OnInit {
     const sportData=this.sportsForm.value;
     console.log('Data from form ',sportData);
     this.addSport(sportData);
+  }
+clearForm(){
+  this.sportsForm.reset();
+}
+  setHeading(){
+    this.sportUpdate=null;
+    this.clearForm();
   }
 
 }

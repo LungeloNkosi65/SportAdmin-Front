@@ -74,7 +74,7 @@ export class EventCrudComponent implements OnInit {
         this.eventService.addEvent(event).subscribe((data:any)=>{
           if(data!=null){
             this.getEvents();
-            this.tournamentId=null;
+            this.changeHeading();
           }
         });
       }
@@ -83,6 +83,7 @@ export class EventCrudComponent implements OnInit {
         event.TournamentId=Number(this.tournamentId);
         this.eventService.updateEvent(this.eventUpdate,event).subscribe((data:any)=>{
             this.getEvents();
+            this.changeHeading();
         });
       }
     }
@@ -121,14 +122,17 @@ export class EventCrudComponent implements OnInit {
      this.tournamentId=this.Selectedtournament.TournamentId;
      console.log('submited id', this.tournamentId);
    }
-
+   clearForm(){
+     this.eventForm.reset();
+   }
 
    changeHeading(){
      this.eventUpdate=null;
      this.Selectedtournament={
       Name:"Select Tournament",
       TournamentId:null
-    }
+    };
+    this.clearForm();
     //  console.log('HEading changed to ', this.eventUpdate)
    }
 

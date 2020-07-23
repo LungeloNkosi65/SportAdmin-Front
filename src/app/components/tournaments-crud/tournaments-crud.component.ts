@@ -38,19 +38,19 @@ export class TournamentsCrudComponent implements OnInit {
     if(tournament!=undefined || tournament!=null){
       if(this.tournamentUpdate==null){
         tournament.TournamentId=this.tournaments.length+1;
-        console.log('data submited',tournament)
+        // console.log('data submited',tournament)
         this.tournamentService.addTournamen(tournament).subscribe(()=>{
           this.getTournaments();
           this.clearForm();
         });
       }
       else{
-        tournament.TournamentId=this.tournamentUpdate;
-        this.tournamentService.updateTournament(this.tournamentUpdate,tournament).subscribe((data:any)=>{
-          this.getTournaments();
-          this.clearForm();
-          this.tournamentUpdate=null;
-        });
+          tournament.TournamentId=this.tournamentUpdate;
+          // console.log('New Updated Record', tournament);
+          this.tournamentService.updateTournament(this.tournamentUpdate,tournament).subscribe((data:any)=>{
+            this.getTournaments();
+              this.setHeading();
+          });
       }
     
     }
@@ -58,12 +58,12 @@ export class TournamentsCrudComponent implements OnInit {
 
 
   loadTournamentToEdit(tournamentId:number){
-    console.log('submited Id', tournamentId);
+    // console.log('submited Id', tournamentId);
     this.tournamentUpdate=tournamentId;
     this.tournamentService.getSingleTournament(tournamentId).subscribe((data:any)=>{
       this.tournament=data;
       this.tournamentForm.controls['Name'].setValue(data[0].Name);
-    })
+    });
   }
   getTournaments(){
     this.tournamentService.getTournaments().subscribe((data:any)=>{
@@ -84,5 +84,6 @@ export class TournamentsCrudComponent implements OnInit {
 
   setHeading(){
     this.tournamentUpdate=null;
+    this.clearForm();
   }
 }
