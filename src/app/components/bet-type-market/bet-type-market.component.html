@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container btm-container">
     <div class="row mt-2">
 
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
+        <button type="button" class="btn btn-primary btn-add ml-3" data-toggle="modal" data-target="#modelId">
             Add New Link
         </button>
 
@@ -13,8 +13,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Link Market</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <ng-template [ngIf]="betTypeMarketUpdate==null">
+                    <h5 class="modal-title">Link Market</h5>
+                </ng-template>
+                <ng-template [ngIf]="betTypeMarketUpdate!=null">
+                    <h5 class="modal-title">Update Link</h5>
+                </ng-template>
+                
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="setHeading()">
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
@@ -30,10 +36,10 @@
                               <button class="btn btn-secondary dropdown-toggle" type="button"
                                   id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                   aria-expanded="false">
-                                  Select BetType
+                                  {{selectedBetType.BetTypeName}}
                               </button>
                               <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;"  >
-                                  <button class="dropdown-item" *ngFor="let bt of betTypes" (click)="getBetTypeId(bt.BetTypeId)">
+                                  <button class="dropdown-item" *ngFor="let bt of betTypes" (click)="getBetTypeId(bt)">
                                       {{bt.BetTypeName}}</button>
                               </div>
                           </div>
@@ -49,11 +55,11 @@
                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                     id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    Select Market
+                                    {{selectedMarket.MarketName}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;">
                                     <button class="dropdown-item" *ngFor="let m of markets"
-                                       (click)="getMarketId(m.MarketId)" >{{m.MarketName}}</button>
+                                       (click)="getMarketId(m)" >{{m.MarketName}}</button>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +69,7 @@
             
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-modal-dismis" data-dismiss="modal" (click)="setHeading()">Close</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onformSubmit()">Save</button>
             </div>
         </div>
@@ -100,8 +106,8 @@
                         <!-- <td>{{btm.MarketId}}</td> -->
                         <td>{{btm.MarketName}}</td>
                         <td>
-                            <button class="btn btn-primary">Update</button>|
-                            <button class="btn btn-danger" (click)="deleteAssociation(btm.BetTypeMarketId)">Delete</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modelId" (click)="loadDataForEdit(btm.BetTypeMarketId)">Update</button>|
+                            <button class="btn btn-danger" (click)="deleteAssociation(btm.BetTypeMarketId)">UnLink</button>
                         </td>
                     </tr>
                 </tbody>

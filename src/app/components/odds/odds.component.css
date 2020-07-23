@@ -1,0 +1,19 @@
+.odds-container{
+    font-family: 'Montserrat', sans-serif !important;
+}
+.btn-add{
+    background-color: rgb(5, 199, 5) !important;
+    border: none !important;
+}
+.btn-primary{
+    background-color: rgb(5, 199, 5) !important;
+    border: none !important;
+}
+.btn-danger{
+    background-color: rgb(221, 9, 9) !important;
+}
+
+.dropdown-menu:hover{
+    color: #23779a !important;
+    /* color: white !important; */
+  }

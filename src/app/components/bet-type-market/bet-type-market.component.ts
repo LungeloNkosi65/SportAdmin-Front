@@ -18,11 +18,14 @@ export class BetTypeMarketComponent implements OnInit {
   betTypeMarkets:BetTypeVm[];
   betTypeMarket:BetTypeMarket;
   betTypes:BetType[];
+  selectedBetType:BetType;
   markets:Market[];
+  selectedMarket:Market;
   betTypeMarketForm:any;
   marketId:number;
   betTypeId:number;
   btmUpdate:number;
+  betTypeMarketUpdate:number;
   
 
   constructor(private betTyMarketService:BetTypeMarketService, private marketService:MarketService,
@@ -43,12 +46,20 @@ export class BetTypeMarketComponent implements OnInit {
   }
 
   getBetTypes(){
+    this.selectedBetType={
+      BetTypeId:null,
+      BetTypeName:'Select Bet Type'
+    }
     this.betTypeService.getBeTypes().subscribe((data:any)=>{
       this.betTypes=data;
     });
   }
 
   getMarkets(){
+    this.selectedMarket={
+      MarketId:null,
+      MarketName:'Select Market'
+    }
     this.marketService.getMarkets().subscribe((data:any)=>{
       this.markets=data;
     });
@@ -56,7 +67,7 @@ export class BetTypeMarketComponent implements OnInit {
 
   addAsscociation(betTypeMarket:BetTypeMarket){
     if(betTypeMarket!=undefined && betTypeMarket!=null){
-      if(this.btmUpdate==null){
+      if(this.betTypeMarketUpdate==null){
         betTypeMarket.BetTypeMarketId=this.betTypeMarkets.length+1;
         betTypeMarket.BetTypeId=this.betTypeId;
         betTypeMarket.MarketId=this.marketId;
@@ -68,7 +79,13 @@ export class BetTypeMarketComponent implements OnInit {
       }
       else{
         //TODOD UPDATE ASSOCIATIONS
-        betTypeMarket.BetTypeMarketId=this.btmUpdate;
+        betTypeMarket.BetTypeMarketId=this.betTypeMarketUpdate;
+        betTypeMarket.MarketId=this.selectedMarket.MarketId;
+        betTypeMarket.BetTypeId=this.selectedBetType.BetTypeId;
+        this.betTyMarketService.updateAssociations(this.betTypeMarketUpdate,betTypeMarket).subscribe(()=>{
+          this.setHeading();
+          this.getBettypeAssociations();
+        });
       }
     }
   }
@@ -87,13 +104,35 @@ export class BetTypeMarketComponent implements OnInit {
   }
 
 
-  getBetTypeId(betTypeId:number){
-    this.betTypeId=betTypeId;
+  loadDataForEdit(betTypeMarketId:number){
+    this.betTypeMarketUpdate=betTypeMarketId;
+    this.betTyMarketService.getSingleBetTypeMarkets(betTypeMarketId).subscribe((data:any)=>{
+      this.getBetTypeForDropdown(data[0].BetTypeId);
+      this.getMarketForDropdown(data[0].MarketId);
+    })
+  }
+
+
+  getMarketForDropdown(marketId:number){
+    this.marketService.getSingleMarket(marketId).subscribe((data:any)=>{
+       this.selectedMarket=data[0];
+    });
+  }
+  getBetTypeForDropdown(betTypeId:number){
+    this.betTypeService.getSingleBetType(betTypeId).subscribe((data:any)=>{
+      this.selectedBetType=data[0];
+    });
+  }
+
+  getBetTypeId(betType:any){
+    this.selectedBetType=betType;
+    this.betTypeId=betType.BetTypeId;
     console.log('submited Id', this.betTypeId);
 
   }
-  getMarketId(marketId:number){
-    this.marketId=marketId;
+  getMarketId(market:any){
+    this.selectedMarket=market;
+    this.marketId=this.selectedMarket.MarketId;
     console.log('submited Id', this.marketId);
   }
 
@@ -103,7 +142,19 @@ export class BetTypeMarketComponent implements OnInit {
   }
 
   clearForm(){
-    this.betTypeMarketForm.clear();
+    this.betTypeMarketForm.reset();
+  }
+
+  setHeading(){
+    this.betTypeMarketUpdate=null;
+    this.selectedMarket={
+      MarketId:null,
+      MarketName:'Select Market'
+    };
+    this.selectedBetType={
+      BetTypeId:null,
+      BetTypeName:'Select Bet Type'
+    };
   }
 
 }

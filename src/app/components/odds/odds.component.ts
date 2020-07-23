@@ -25,6 +25,7 @@ export class OddsComponent implements OnInit {
   btmId:number;
   eventId:number;
   oddsUpdate:number;
+  singleOdd:OddsVm;
 
 
   constructor(private eventServices:EventService,private btmServicce:BetTypeMarketService,
@@ -39,23 +40,7 @@ export class OddsComponent implements OnInit {
       Odds1:['',Validators.required]
     });
   }
-  ngAfterContentChcked(){
-    this.selectedBtm={
-      BetTypeId:null,
-      BetTypeMarketCode:'Select BTM Code',
-      BetTypeName:null,
-      BetTypeMarketId:null,
-      MarketId:null,
-      MarketName:null,
-      
-    }
-    this.selectedEvent={
-      EventId:null,
-      EventName: 'Select Event',
-      EeventDate:null,
-      TournamentId:null
-    }
-  }
+ 
 
   getOdds(){
     this.oddsService.getOdds().subscribe((data:any)=>{
@@ -64,64 +49,69 @@ export class OddsComponent implements OnInit {
   }
 
   getEvents(){
+    this.selectedEvent={
+      EventId:null,
+      EventName: 'Select Event',
+      EeventDate:null,
+      TournamentId:null
+    };
     this.eventServices.getEvents().subscribe((data:any)=>{
       this.events=data;
-      this.selectedEvent={
-        EventId:null,
-        EventName: 'Select Event',
-        EeventDate:null,
-        TournamentId:null
-      }
     });
   }
 
   
 
   getBetTypeMarkets(){
+    this.selectedBtm={
+      BetTypeId:null,
+      BetTypeMarketCode:'Select BTM Code',
+      BetTypeName:null,
+      BetTypeMarketId:null,
+      MarketId:null,
+      MarketName:null,
+    };
     this.btmServicce.getBetTypeMarkets().subscribe((data:any)=>{
       this.btMarkets=data;
-      this.selectedBtm={
-        BetTypeId:null,
-        BetTypeMarketCode:'Select BTM Code',
-        BetTypeName:null,
-        BetTypeMarketId:null,
-        MarketId:null,
-        MarketName:null,
-      }
     });
   }
 
 
   addodds(odd:IOdds){
     if(odd!=null && odd!=undefined){
+      console.log('OddsUpdate variable', this.oddsUpdate);
       if(this.oddsUpdate==null){
         odd.OddId=this.odds.length+1;
         odd.EventId=this.eventId;
         odd.BetTypeMarketId=this.btmId;
         this.oddsService.addOdds(odd).subscribe((data:any)=>{
-             this.getOdds();
-             this.setHeading();
+          if(data!=null){
+            this.getOdds();
+            this.setHeading();
+          }
         });
       }
       else{
         odd.OddId=this.oddsUpdate;
         odd.BetTypeMarketId=this.btmId;
         odd.EventId=this.eventId;
-        console.log('This is what i amm submiting', odd);
+        // console.log('This is what i amm submiting', odd);
 
         this.oddsService.updateOdd(odd).subscribe((data:any)=>{
-          this.getOdds();
-          this.oddsUpdate=null;
-          this.clearForm();
-        })
+          if(data!=null){
+            this.getOdds();
+            this.oddsUpdate=null;
+            this.clearForm();
+          }
+        });
       }
-    
     }
   }
 
-loadOddsToEdit(oddId){
+loadOddsToEdit(oddId:number){
   this.oddsUpdate=oddId;
   this.oddsService.getSingleOdd(oddId).subscribe((data:any)=>{
+    this.singleOdd=data;
     console.log('Odd found ',data)
     this.oddsForm.controls['Odds1'].setValue(data[0].Odds1);
     this.getSingleEvent(data[0].EventId);

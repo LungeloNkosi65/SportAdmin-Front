@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container sporttournament-container">
     <div class="row mt-2">
         <!-- <h2>Manage Tournament Link</h2> -->
         <div class="col-md-12">
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
+<button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#modelId">
     Add New Link
   </button>
   
@@ -88,7 +88,7 @@
               
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="setHeading()">Close</button>
+                  <button type="button" class="btn btn-secondary btn-modal-dismis" data-dismiss="modal" (click)="setHeading()">Close</button>
                   <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onFormSubmit()">Save</button>
               </div>
           </div>
@@ -142,8 +142,9 @@
                         <td>{{st.CountryName}}</td>
                         <td>{{st.TournamentName}}</td>
                         <td>
-                            <button class="btn btn-danger" (click)="removeLink(st.SportTourtnamentId)">UnLink</button> |
-                            <button class="btn btn-primary " data-toggle="modal" data-target="#modelId" (click)="loadSportTournament(st.SportTourtnamentId)">Update</button>
+                            <button class="btn btn-primary " data-toggle="modal" data-target="#modelId" (click)="loadSportTournament(st.SportTourtnamentId)">Update</button>|
+                            <button class="btn btn-danger" (click)="removeLink(st.SportTourtnamentId)">UnLink</button> 
+                        
                         </td>
                     </tr>
                 </tbody>

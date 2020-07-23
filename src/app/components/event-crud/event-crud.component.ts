@@ -55,14 +55,13 @@ export class EventCrudComponent implements OnInit {
   //   });
   // }
   getTournaments(){
+    this.Selectedtournament={
+      TournamentId:null,
+      Name:'Select Tournament'
+    };
     this.tournamentService.getTournaments().subscribe((data:any)=>{
       this.tournaments=data;
-      this.Selectedtournament={
-        TournamentId:null,
-        Name:'Select Tournament'
-      }
       // this.Selectedtournament=data[0];
-
     });
   }
 
@@ -81,10 +80,9 @@ export class EventCrudComponent implements OnInit {
       }
       else{
         event.EventId=this.eventUpdate;
+        event.TournamentId=Number(this.tournamentId);
         this.eventService.updateEvent(this.eventUpdate,event).subscribe((data:any)=>{
-          if(data!=null){
             this.getEvents();
-          }
         });
       }
     }

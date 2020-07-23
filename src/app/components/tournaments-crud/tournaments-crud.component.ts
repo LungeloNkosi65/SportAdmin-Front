@@ -82,4 +82,7 @@ export class TournamentsCrudComponent implements OnInit {
     this.tournamentForm.reset();
   }
 
+  setHeading(){
+    this.tournamentUpdate=null;
+  }
 }

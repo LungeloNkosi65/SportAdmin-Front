@@ -60,7 +60,11 @@ export class SportCrudComponent implements OnInit {
         });
       }
       else{
-        this.deleteSport(this.sportUpdate);
+        if(window.confirm("Are you sure you want to update this record")){
+          sport.SportId=this.sportUpdate;
+          this.updateSport(this.sportUpdate,sport);
+        }
+   
       }
     
     }
@@ -70,7 +74,7 @@ export class SportCrudComponent implements OnInit {
     if(window.confirm("Are you sure you want to delete record")){
       this.sportTreeService.deleteSport(sportId).subscribe(()=>{
         this.getSports();
-        console.log('inside Delete')
+        // console.log('inside Delete')
       });
     }
 

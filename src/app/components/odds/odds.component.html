@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container odds-container">
     <div class="row mt-2">
         <div class="col-md-12">
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
+            <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#modelId">
                 Add Odds For Event
               </button>
 
@@ -18,6 +18,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </ng-template>
+
                             <ng-template [ngIf]="oddsUpdate!=null">
                                 <h5 class="modal-title">Update Odds For Event</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" click()="setHeading()">
@@ -59,7 +60,7 @@
                                                 aria-expanded="false">
                                              {{selectedEvent.EventName}}
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="triggerId" style="height: 200px !important; min-width: 50% !important; overflow-x: hidden !important;">
+                                            <div class="dropdown-menu" aria-labelledby="triggerId" >
                                                 <button class="dropdown-item" *ngFor="let e of events"
                                                    (click)="getEventId(e)" >{{e.EventName}}</button>
                                             </div>
@@ -82,7 +83,7 @@
                         
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="setHeading()">Close</button>
+                            <button type="button" class="btn btn-secondary btn-modal-dismis" data-dismiss="modal" (click)="setHeading()">Close</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onFormSubmit()">Save</button>
                         </div>
                     </div>
@@ -123,8 +124,9 @@
                         <td>{{od.EventName}}</td>
                         <td>{{od.Odds}}</td>
                         <td>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#modelId" (click)="loadOddsToEdit(od.OddId)">Update</button>|
-                            <button class="btn btn-danger" (click)="delete(od.OddId)">Delete</button>
+                            <button class="btn btn-danger" (click)="delete(od.OddId)">Delete</button>|
+
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modelId" (click)="loadOddsToEdit(od.OddId)">Update</button>
                         </td>
                     </tr>
                 </tbody>

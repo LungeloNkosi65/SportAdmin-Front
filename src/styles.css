@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.modal-header{
+    background-color: #178bbd !important;
+    font-family: 'Montserrat', sans-serif !important;
+    color: white !important;
+}
+.btn-modal-dismis{
+    background-color: rgb(221, 9, 9) !important;
+    border: none !important;
+}
+.close{
+    border-color: rgb(221, 9, 9) !important;
+    /* border: none !important; */
+}
+.dropdown-menu{
+    background-color: #23779a !important;
+    color: white !important;
+    font-family: 'Montserrat', sans-serif !important;
+    height: 200px !important;
+     min-width: 50% !important; 
+     overflow-x: hidden !important;
+
+  }
+  .dropdown-item{
+    color: white !important;
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+
+  .dropdown-item:hover{
+    color: #23779a !important;
+  }

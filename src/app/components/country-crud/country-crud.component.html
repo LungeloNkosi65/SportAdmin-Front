@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container country-container">
     <div class="row mt-2">
         <div class="col-md-12">
 
                  <!-- Button trigger modal -->
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId" (cick)="setHeading()">
+                 <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#modelId" (cick)="setHeading()">
                    Add Country
                  </button>
                  
@@ -48,7 +48,7 @@
                                 </form>
                              </div>
                              <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                 <button type="button" class="btn btn-secondary btn-modal-dismis" data-dismiss="modal">Close</button>
                                  <button type="submit" class="btn btn-primary"  data-dismiss="modal"  (click)="onFormSubmit()">Save</button>
                              </div>
                          </div>
@@ -71,9 +71,13 @@
                         <td>{{country.CountryId}}</td>
                         <td>{{country.CountryName}}</td>
                         <td>{{country.Flag}}</td>
+                        <!-- <td>
+                            <img src="https://www.countryflags.io/{{country.Flag}}/flat/24.png"
+                            alt="">
+                        </td> -->
                         <td>
                             <button type="button" class="btn btn-danger" (click)="deleteCountry(country.CountryId)">Delete</button>|
-                            <button type="button" class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modelId" (click)="loadCountryToEdit(country.CountryId)"> Update</button>
+                            <button type="button" class="btn btn-primary btn-primary btn-update" data-toggle="modal" data-target="#modelId" (click)="loadCountryToEdit(country.CountryId)"> Update</button>
                         </td>
                         <td></td>
                     </tr>

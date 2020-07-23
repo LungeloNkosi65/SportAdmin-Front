@@ -84,11 +84,12 @@ export class BetTypeComponent implements OnInit {
     });
   }
   clearForm(){
-    this.betTypeForm.clear();
+    this.betTypeForm.reset();
   }
 
   setHeading(){
     this.betTypeUpdate=null;
+    this.clearForm();
   }
 
 }
