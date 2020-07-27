@@ -1,4 +1,4 @@
-# Sport Admin
+# Sport Admin Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0. The project handles the crud operation for the Hollywoodbets Sports Api
 which is found on this link :https://github.com/LungeloNkosi65/Sports_Api.git
